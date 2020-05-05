@@ -1,4 +1,4 @@
-package com.fnb.cis.service;
+package com.demo.cis.service;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fnb.cis.dto.CustomerResponseDTO;
-import com.fnb.cis.model.Customer;
-import com.fnb.cis.repository.CustomerRepository;
+import com.demo.cis.dto.CustomerResponseDTO;
+import com.demo.cis.model.Customer;
+import com.demo.cis.repository.CustomerRepository;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;

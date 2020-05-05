@@ -1,52 +1,38 @@
-package com.fnb.cis.model;
+package com.demo.cis.dto;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "customer_id")
-	private long customerId;
-	
-	@Column(name = "first_name")
+public class CustomerRequestDTO {
+
+	@NotBlank
 	private String firstName;
 	
-	@Column(name = "last_name")
+	@NotBlank
 	private String lastName;
 	
-	@Column(name = "middle_name")
 	private String middleName;
 	
-	@Column(name = "primary_phone")
+	@NotBlank
+	@Digits(integer = 10, fraction = 0)
 	private String primaryPhone;
 	
-	@Column(name = "sec_phone")
 	private String secPhone;
 	
-	@Column(name = "gender")
+	@NotBlank
 	private String gender;
 	
-	@Column(name = "dob")
+	@NotNull
 	private LocalDate dob;
 	
-	@Column(name = "email")
+	@NotBlank
+	@Email
 	private String email;
 	
-	public long getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -95,4 +81,13 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return "CustomerCreationDTO [firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
+				+ ", primaryPhone=" + primaryPhone + ", secPhone=" + secPhone + ", gender=" + gender + ", dob=" + dob
+				+ "]";
+	}
+	
+	
 }

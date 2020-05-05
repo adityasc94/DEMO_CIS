@@ -1,4 +1,4 @@
-package com.fnb.cis.restcontroller;
+package com.demo.cis.restcontroller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fnb.cis.dto.CustomerRequestDTO;
-import com.fnb.cis.dto.CustomerResponseDTO;
-import com.fnb.cis.model.Customer;
-import com.fnb.cis.service.CustomerService;
+import com.demo.cis.dto.CustomerRequestDTO;
+import com.demo.cis.dto.CustomerResponseDTO;
+import com.demo.cis.model.Customer;
+import com.demo.cis.service.CustomerService;
 
 @RestController
 @RequestMapping(value = "/customers")
@@ -100,10 +100,13 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> deleteCustomer(@NotNull @PathVariable Long id){
-		customerService.deleteCustomer(id);
-		return ResponseEntity.noContent().build();
+		Customer customer = customerService.find(id);
+		if(customer!=null) {
+			customerService.deleteCustomer(id);
+			return ResponseEntity.noContent().build();
+		} 
+		return ResponseEntity.notFound().build();
 	}
 
 }

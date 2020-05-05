@@ -1,6 +1,6 @@
 
 --Create database
-CREATE DATABASE fnbcis
+CREATE DATABASE democis
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'

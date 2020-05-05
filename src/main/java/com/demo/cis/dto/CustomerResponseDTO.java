@@ -1,38 +1,25 @@
-package com.fnb.cis.dto;
+package com.demo.cis.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-public class CustomerRequestDTO {
-
-	@NotBlank
+public class CustomerResponseDTO {
+	private long customerId;
 	private String firstName;
-	
-	@NotBlank
 	private String lastName;
-	
 	private String middleName;
-	
-	@NotBlank
-	@Digits(integer = 10, fraction = 0)
 	private String primaryPhone;
-	
 	private String secPhone;
-	
-	@NotBlank
 	private String gender;
-	
-	@NotNull
 	private LocalDate dob;
-	
-	@NotBlank
-	@Email
 	private String email;
 	
+	public long getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -81,13 +68,4 @@ public class CustomerRequestDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Override
-	public String toString() {
-		return "CustomerCreationDTO [firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
-				+ ", primaryPhone=" + primaryPhone + ", secPhone=" + secPhone + ", gender=" + gender + ", dob=" + dob
-				+ "]";
-	}
-	
-	
 }
