@@ -1,2 +1,2 @@
-# FNB_CIS
-FNB Customer Information System
+# DEMO_CIS
+DEMO Customer Information System
