@@ -11,7 +11,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.cis.dto.CustomerRequestDTO;
 import com.demo.cis.dto.CustomerResponseDTO;
+import com.demo.cis.dto.ValidationErrorDTO;
 import com.demo.cis.model.Customer;
 import com.demo.cis.service.CustomerService;
 
+@Validated
 @RestController
 @RequestMapping(value = "/customers")
 public class CustomerController {
@@ -109,4 +116,15 @@ public class CustomerController {
 		return ResponseEntity.notFound().build();
 	}
 
+	
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class) 
+	public ResponseEntity<ValidationErrorDTO> validationExceptionHandler(MethodArgumentNotValidException ex) { 
+		ValidationErrorDTO errorResponse = new ValidationErrorDTO();
+		for(FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+			errorResponse.addFieldError(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+	}
+	 
 }
