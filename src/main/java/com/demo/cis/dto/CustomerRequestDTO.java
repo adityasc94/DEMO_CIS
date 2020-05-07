@@ -2,36 +2,43 @@ package com.demo.cis.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.demo.cis.validator.DateOfBirth;
 
 public class CustomerRequestDTO {
 
-	@NotEmpty(message = "{firstName.not.empty}")
+	@NotEmpty(message = "First Name {null.empty}")
+	@Pattern(regexp = "^[a-zA-Z'-]{1,30}", message = "First Name {invalid}")
 	private String firstName;
 	
-	@NotBlank
+	@NotEmpty(message = "Last Name {null.empty}")
+	@Pattern(regexp = "^[a-zA-Z'-]{1,30}", message = "Last Name {invalid}")
 	private String lastName;
 	
+	@Pattern(regexp = "^[a-zA-Z'-]{1,30}", message = "Middle Name {invalid}")
 	private String middleName;
 	
-	@NotBlank
-	@Digits(integer = 10, fraction = 0)
+	@NotEmpty(message = "Primary Phone {null.empty}")
+	@Pattern(regexp = "[0-9]{10}", message = "Primary Phone {invalid}")
 	private String primaryPhone;
 	
+	@Pattern(regexp = "[0-9]{10}", message = "Secondary Phone {invalid}")
 	private String secPhone;
 	
-	@NotBlank
+	@NotEmpty(message = "Gender {null.empty}")
+	@Pattern(regexp = "[MF]", message = "Gender {invalid}")
 	private String gender;
 	
-	@NotNull
+	@NotNull(message = "Date of Birth {null.empty}")
+	@DateOfBirth(message = "Date of Birth {invalid}")
 	private LocalDate dob;
 	
-	@NotBlank
-	@Email
+	@NotEmpty(message = "Email {null.empty}")
+	@Email(message = "Email {invalid}")
 	private String email;
 	
 	public String getFirstName() {
